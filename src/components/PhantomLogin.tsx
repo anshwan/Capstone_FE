@@ -36,7 +36,9 @@ const PhantomLogin: React.FC = () => {
       setWallet(publicKey);
 
       // 서버에서 nonce 요청
-      const nonceRes = await fetch(`${API_URL}/login/nonce?wallet=${publicKey}`);
+      const nonceRes = await fetch(`${API_URL}/login/nonce?wallet=${publicKey}`, {
+        credentials: "include",
+      });
       const { nonce } = await nonceRes.json();
 
       // 메시지 서명
