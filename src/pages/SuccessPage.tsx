@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Connection, PublicKey, clusterApiUrl, Transaction } from "@solana/web3.js";
-import api from "../api";
+import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import BackgroundCanvas from "../components/BackgroundCanvas";
 
 const SuccessPage: React.FC = () => {
@@ -11,7 +10,7 @@ const SuccessPage: React.FC = () => {
   const [balance, setBalance] = useState<number | null>(null);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
+    const storedToken = localStorage.getItem("jwt"); // ✅ 수정된 부분
     const provider = (window as any).solana;
 
     if (!storedToken || !provider?.publicKey) {
@@ -36,7 +35,15 @@ const SuccessPage: React.FC = () => {
   if (!token || !wallet) return null;
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh", overflow: "visible", zIndex: 0,}}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        overflow: "visible",
+        zIndex: 0,
+      }}
+    >
       <BackgroundCanvas showSphere={true} />
       <div
         style={{
