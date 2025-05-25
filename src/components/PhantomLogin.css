@@ -1,0 +1,65 @@
+.login-container {
+  display: flex;
+  width: 200%;
+  transform: translateX(0%);
+  transition: transform 1s ease-in-out;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.login-container.slide {
+  transform: translateX(-25%);
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  justify-content: left;
+  padding-left: 3rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.left-panel {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  height: 100vh;
+}
+
+.right-panel {
+  flex: 1;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.phantom-button {
+  background-color: #9886e5;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet {
+  margin-top: 1rem;
+}
+
+.error {
+  color: #f87171;
+  margin-top: 1rem;
+}
