@@ -5,7 +5,7 @@ import "./PhantomLogin.css";
 
 window.Buffer = Buffer;
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const PhantomLogin: React.FC = () => {
   const [wallet, setWallet] = useState("");
@@ -33,12 +33,14 @@ const PhantomLogin: React.FC = () => {
       const resp = await provider.connect();
       const publicKey = resp.publicKey.toString();
       setWallet(publicKey);
+      console.log("🔑 Wallet 연결:", publicKey);
 
       // ✅ 서버에서 nonce 요청
       const nonceRes = await fetch(`${API_URL}/login/nonce?wallet=${publicKey}`, {
         credentials: "include",
       });
       const { nonce } = await nonceRes.json();
+      console.log("📩 받은 nonce:", nonce);
 
       // ✅ 메시지 서명
       const encodedMessage = new TextEncoder().encode(nonce);
@@ -54,9 +56,11 @@ const PhantomLogin: React.FC = () => {
       });
 
       const data = await verifyRes.json();
+      console.log("🎯 verify 응답:", data);
 
       if (verifyRes.ok) {
         localStorage.setItem("jwt", data.token); // access token 저장
+        console.log("✅ accessToken 저장 완료");
 
         // ✅ access token 갱신 테스트
         try {
